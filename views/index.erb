@@ -12,6 +12,7 @@
         <ul>
             <li id="links">Menu</li>
             <li id="links">Apoiadores</li>
+            <li id="links">Admin</li>
         </ul>
     </header>
 
@@ -23,21 +24,21 @@
                     <% @foods.each do |food| %>
                     
                         <div>
-                            <h3 class="comidas"><%= food[:name]%></h3>
-                            <p class="comidas" id="info_id">Barraca: <%= food[:id]%></p>
+                            <h3 class="comidas"><%= food.name%></h3>
+                            <p class="comidas" id="info_id">Barraca: <%= food.id%></p>
                             <h4 class="flavor" id="title">Sabores:</h4>
                             <div class="flavor" id="container">
-                                <% food[:flavor].each do |flavor|%>
-                                    <div class="flavor"  <%= flavor[:image].nil? ? 'id="noflex"' : 'id="flex"'  %>>
-                                        <img src="<%= flavor[:image]%>" alt="">
+                                <% food.products.each do |item|%>
+                                    <div class="flavor"  <%= item.image.empty? ? 'id="noflex"' : 'id="flex"'  %>>
+                                        <img src="<%= item.image %>" alt="">
                                         
                                         <div>
                                             <div class="flavor" id="name-value">
-                                                <div><h5><%= flavor[:name]%></h5></div>  <div>R$<%= flavor[:value]%></div>
+                                                <div><h5><%= item.name%></h5></div>  <div>R$<%= item.value%></div>
                                             </div> 
                                             <div id="ingredientes">
-                                                <% unless flavor[:ingredients].nil?%>
-                                                    Ingredientes: <%= flavor[:ingredients]%>
+                                                <% unless item.description.empty? %>
+                                                    Ingredientes: <%= item.description%>
                                                 <% end %>
                                             </div>
                                         </div>
@@ -59,10 +60,10 @@
                     <li class="bebidas">
                         <div class="bebidas" id="itens">
                             <div>
-                                <%= drink[:name]%>
+                                <%= drink.name%>
                             </div>
                             <div>
-                                R$<%= drink[:value]%>
+                                R$<%= drink.value%>
                             </div>
                         </div>
                     </li>
@@ -76,11 +77,11 @@
                     <div class="brinquedos" id="itens" >
                         
                         <div>
-                            <%= toy[:name]%>
+                            <%= toy.name%>
                         </div>
 
                         <div>
-                            R$<%= toy[:value]%>
+                            R$<%= toy.value%>
                         </div>
                     </div>
                 <% end %>
