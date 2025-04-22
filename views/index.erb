@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Digital</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Menu Feira amizade 2025</h1>
+        <ul>
+            <li id="links">Menu</li>
+            <li id="links">Apoiadores</li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="comidas">
+            <h2 class="comidas">Comidas</h2>
+            <div class="comidas" >
+                <div class="comidas" id="container" >
+                    <% @foods.each do |food| %>
+                    
+                        <div>
+                            <h3 class="comidas"><%= food[:name]%></h3>
+                            <p class="comidas" id="info_id">Barraca: <%= food[:id]%></p>
+                            <h4 class="flavor" id="title">Sabores:</h4>
+                            <div class="flavor" id="container">
+                                <% food[:flavor].each do |flavor|%>
+                                    <div class="flavor"  <%= flavor[:image].nil? ? 'id="noflex"' : 'id="flex"'  %>>
+                                        <img src="<%= flavor[:image]%>" alt="">
+                                        
+                                        <div>
+                                            <div class="flavor" id="name-value">
+                                                <div><h5><%= flavor[:name]%></h5></div>  <div>R$<%= flavor[:value]%></div>
+                                            </div> 
+                                            <div id="ingredientes">
+                                                <% unless flavor[:ingredients].nil?%>
+                                                    Ingredientes: <%= flavor[:ingredients]%>
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <div>
+        </div>
+
+        <div class="bebidas" id="container">
+            <h2>Bebidas</h2>
+            <p>Barraca: 01</p>
+            <ul class="bebidas">  
+                <% @drinks.each do |drink|%>
+                    
+                    <li class="bebidas">
+                        <div class="bebidas" id="itens">
+                            <div>
+                                <%= drink[:name]%>
+                            </div>
+                            <div>
+                                R$<%= drink[:value]%>
+                            </div>
+                        </div>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+        <div class="brinquedos" id="container">
+            <h2>Brinquedos</h2>
+            <div class="brinquedos">
+                <% @toys.each do |toy|%>
+                    <div class="brinquedos" id="itens" >
+                        
+                        <div>
+                            <%= toy[:name]%>
+                        </div>
+
+                        <div>
+                            R$<%= toy[:value]%>
+                        </div>
+                    </div>
+                <% end %>
+            </civ>
+        </div>
+    </main>
+
+    <footer>
+        <p>Menu criado com muito amor por: Pedro R</p>
+    </footer>
+</body>
+</html>
