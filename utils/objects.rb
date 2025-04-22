@@ -1,15 +1,24 @@
 class Food
-  attr_reader :products, :name, :id
-  
-  def initialize(name, id)
-      @name = name
-      @id = id
-      @products = []
-  end
+    attr_reader :products, :name, :id
 
-  def addItem(item)
-      @products.push(item)
-  end
+    def initialize(name, id)
+        self.name = name
+
+        @id = id
+        @products = []
+    end
+
+    def name=(name)
+        @name = name.downcase.gsub(" ", "_")
+    end
+
+    def getFactoredName
+        return @name.capitalize.gsub("_", "")
+    end
+
+    def addItem(item)
+        @products.push(item)
+    end
 
 end
 
@@ -19,17 +28,17 @@ class Item
   attr_reader :name, :value, :image_link, :description, :image
 
   def initialize(name, value)
-      @name = name.to_s
-      @value = value
-      @image = ""
-      @description = ""
+    @name = name.to_s
+    @value = value
+    @image = ""
+    @description = ""
   end
 
   def setImage(imageLink)
-      @image = imageLink
+    @image = imageLink
   end
 
   def setDescription(description)
-      @description = description.to_s
+    @description = description.to_s
   end
 end

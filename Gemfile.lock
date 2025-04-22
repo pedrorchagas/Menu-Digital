@@ -3,6 +3,7 @@ GEM
   specs:
     base64 (0.2.0)
     logger (1.7.0)
+    mini_portile2 (2.8.8)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.7.4)
@@ -26,6 +27,9 @@ GEM
       rack-protection (= 4.1.1)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
+    sqlite3 (2.6.0)
+      mini_portile2 (~> 2.8.0)
+    sqlite3 (2.6.0-x86_64-linux-gnu)
     tilt (2.6.0)
 
 PLATFORMS
@@ -36,6 +40,7 @@ DEPENDENCIES
   puma
   rackup
   sinatra
+  sqlite3
 
 BUNDLED WITH
    2.5.23
