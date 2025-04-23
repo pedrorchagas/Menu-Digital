@@ -20,14 +20,19 @@ end
 
 get "/" do
     @foods = getAll()
-
-    @drinks = [Item.new("Coca 2lt", 2.00), Item.new("Coca 4lt", 8.00)]
-    @toys = [Item.new("Pula pula", 20.20)]
+    @drinks = getDrinks
+    @toys = getToys
     erb :index
 end
 
 get "/admin" do
+    redirect '/admin/'
+end
+
+get "/admin/" do
     @foods = listFoods()
+    @drinks = getDrinks
+    @toys = getToys
     erb :admin
 end
 
@@ -37,7 +42,7 @@ post "/admin/createfood" do
 
     createFood(Food.new(name, id))
 
-    return 'Criado com sucesso!'
+    redirect '/admin/'
 end
 
 get "/admin/:food" do
@@ -46,15 +51,53 @@ get "/admin/:food" do
     erb :foods
 end
 
+post "/admin/:food/delete" do
+    deleteFood(params['food'])
+    redirect '/admin/'
+end
+
 post "/admin/:food/createproduct" do
     food = getFood(params['food'])
 
     product_name = params['name']
     product_value = params['value']
     product_description = params['description']
+    product_image = params['image']
     product = Item.new(product_name, product_value)
     product.setDescription(product_description)
+    product.setImage(product_image)
 
     addProduct(food, product)
-    return "Deu certo!!!"
+    redirect "/admin/#{params['food']}"
+end
+
+post "/admin/food/:food/:id/delete" do
+    removeProduct(params['food'], params['id'])
+    redirect "/admin/#{params['food']}"
+end
+
+post "/admin/drink/create" do
+    name = params['name']
+    value = params['value']
+    addDrink(name, value)
+    redirect '/admin/'
+end
+
+post "/admin/drink/:id/delete" do
+    id = params['id']
+    removeDrink(id)
+    redirect '/admin/'
+end
+
+post "/admin/toy/create" do
+    name = params['name']
+    value = params['value']
+    addToy(name, value)
+    redirect '/admin/'
+end
+
+post "/admin/toy/:id/delete" do
+    id = params['id']
+    removeToy(id)
+    redirect '/admin/'
 end

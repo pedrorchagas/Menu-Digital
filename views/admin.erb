@@ -1,34 +1,106 @@
-
-<h2>Bem-vindo a área de adm</h2>
+<% @style = "/admin.css"%>
+<h2 id="title">Bem-vindo a área de adm</h2>
 
 <div>
-    <h3>Barracas: </h3>
-    <ul>
-        
-        <% @foods.each do | food |%>
+    <div>
+        <h3 id="title">Comidas: </h3>
+        <ul>
+            
+            <% @foods.each do | food |%>
 
-            <li>
-                <div>
-                    <h4><%= food.name %></h4> <p><%= food.id %></p>
-                </div>
-            </li>
-        <% end %>
-    </ul>
+                <li>
+                    <div class="foods">
+                        
+                        <h4><%= food.getFactoredName %></h4>
+                        <p>Barraca: <%= food.id %></p>
+                        <div>
+                            <form action="/admin/<%= food.name %>/delete" method="post">
+                                <input type="submit" value="Deletar">
+                            </form>
+                            <a href="/admin/<%= food.name %>">Editar</a>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <div id="form">
+        <h3>Adicionar comida</h3>
+        <form action="/admin/createfood" method="post" id="form">
+            <label for="name">Nome:</label>
+            <input type="text" name="name">
+            <label for="id">Numero da barraca: </label>
+            <input type="text" name="id">
+            <button type="submit">Criar</button>
+        </form>
+    </div>
 </div>
 
+<div>
+    <div>
+        <h3 id="title">Bebidas: </h3>
+        <ul>
+            
+            <% @drinks.each do | drink |%>
 
-<form action="/admin/createfood" method="post">
-    <label for="name">Nome:</label>
-    <input type="text" name="name">
-    <label for="id">Numero da barraca: </label>
-    <input type="text" name="id">
-    <button type="submit">Criar</button>
-</form>
+                <li>
+                    <div class="foods">
+                        
+                        <h4><%= drink.name %></h4>
+                        <div>
+                            <form action="/admin/drink/<%= drink.id %>/delete" method="post">
+                                <input type="submit" value="Deletar">
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    </div>
 
-<form action="/admin/additem" method="post">
-    <label for="name">:</label>
-    <input type="text" id="name">
-    <label for="id">Numero da barraca: </label>
-    <input type="text">
-    <button type="submit">Criar</button>
-</form>
+    <div id="form">
+        <h3>Adicionar Bebida:</h3>
+        <form action="/admin/drink/create" method="post" id="form">
+            <label for="name">Nome:</label>
+            <input type="text" name="name">
+            <label for="value">Valor: </label>
+            <input type="text" name="value">
+            <button type="submit">Criar</button>
+        </form>
+    </div>
+</div>
+
+<div>
+    <div>
+        <h3 id="title">Briquedos: </h3>
+        <ul>
+            
+            <% @toys.each do | toy |%>
+
+                <li>
+                    <div class="foods">
+                        
+                        <h4><%= toy.name %></h4>
+                        <div>
+                            <form action="/admin/toy/<%= toy.id %>/delete" method="post">
+                                <input type="submit" value="Deletar">
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <div id="form">
+        <h3>Adicionar Brinquedo:</h3>
+        <form action="/admin/toy/create" method="post" id="form">
+            <label for="name">Nome:</label>
+            <input type="text" name="name">
+            <label for="value">Valor: </label>
+            <input type="text" name="value">
+            <button type="submit">Criar</button>
+        </form>
+    </div>
+</div>

@@ -28,6 +28,13 @@ header {
 #links {
     display: inline;
     margin-right: 15px;
+
+}
+
+a {
+    color: inherit;
+    outline: none;
+    text-decoration: none;
 }
 
 main {

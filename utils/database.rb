@@ -12,6 +12,24 @@ $database.execute <<-SQL
   );
 SQL
 
+$database.execute <<-SQL
+  CREATE TABLE IF NOT EXISTS drinks (
+    Unique_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    value REAL NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+SQL
+
+$database.execute <<-SQL
+  CREATE TABLE IF NOT EXISTS toys (
+    Unique_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    value REAL NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+SQL
+
 def createFood(food)
   $database.execute("INSERT INTO foods (name, id_store) VALUES (?, ?)", [food.name, food.id])
   $database.execute <<-SQL
@@ -25,6 +43,11 @@ def createFood(food)
     );
   SQL
 
+end
+
+def deleteFood(food_name)
+  $database.execute("DROP TABLE products_#{food_name}")
+  $database.execute("DELETE FROM foods WHERE name = ?", [food_name])
 end
 
 def listFoods()
@@ -47,6 +70,7 @@ def getFood(foodName)
     product = Item.new(productSQL[1], productSQL[2])
     product.setImage(productSQL[3])
     product.setDescription(productSQL[4])
+    product.setID(productSQL[0])
 
     food.addItem(product)
   end
@@ -71,6 +95,10 @@ def listProducts(foodName)
   return products
 end
 
+def removeProduct(food, product_id)
+  $database.execute("DELETE FROM products_#{food} WHERE unique_id = ?", [product_id])
+end
+
 def getAll()
   foods = []
 
@@ -87,4 +115,44 @@ def getAll()
     foods.push(food)
   end
   return foods
+end
+
+def getDrinks()
+  drinks = []
+
+  $database.execute("SELECT * FROM drinks").each do | drink |
+    item = Item.new(drink[1], drink[2])
+    item.setID(drink[0])
+
+    drinks.push(item)
+  end
+  return drinks
+end
+
+def addDrink(name, value)
+  $database.execute("INSERT INTO drinks (name, value) VALUES (?, ?)", [name, value])
+end
+
+def removeDrink(id)
+  $database.execute("DELETE FROM drinks WHERE unique_id = ?", [id])
+end
+
+def getToys()
+  toys = []
+
+  $database.execute("SELECT * FROM toys").each do | toy |
+    item = Item.new(toy[1], toy[2])
+    item.setID(toy[0])
+
+    toys.push(item)
+  end
+  return toys
+end
+
+def addToy(name, value)
+  $database.execute("INSERT INTO toys (name, value) VALUES (?, ?)", [name, value])
+end
+
+def removeToy(id)
+  $database.execute("DELETE FROM toys WHERE unique_id = ?", [id])
 end
