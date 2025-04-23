@@ -9,7 +9,7 @@ class Food
     end
 
     def name=(name)
-        @name = name.downcase.gsub(" ", "_")
+      @name = name.downcase.gsub(" ", "_")
     end
 
     def getFactoredName

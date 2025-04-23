@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Digital</title>
+    <link rel="stylesheet" href="/layout.css">
+    <link rel="stylesheet" href="<%= @style %>">
+</head>
+<body>
+    <header>
+        <h1>Menu Feira amizade 2025</h1>
+        <ul>
+            <li id="links">Menu</li>
+            <li id="links">Apoiadores</li>
+            <li id="links">Admin</li>
+        </ul>
+    </header>
+
+    <main>
+        <%= yield %>
+    </main>
+
+    <footer>
+        <p>Menu criado com muito amor por: Pedro R</p>
+    </footer>
+</body>
+</html>
