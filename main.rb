@@ -76,6 +76,24 @@ post "/admin/food/:food/:id/delete" do
     redirect "/admin/#{params['food']}"
 end
 
+get "/admin/food/:food/:id/edit" do
+    @product = getProduct(params['food'], params['id'])
+    erb :edit_food
+end
+
+post "/admin/food/:food/:id/edit" do
+    product = getProduct(params['food'], params['id'])
+    puts " ID: #{product.id}"
+    product.name = params['name']
+    product.value = params['value'] 
+    product.description = params['description']
+    product.image = params['image']
+
+    editProduct(params['food'], product)
+    redirect "/admin/#{params['food']}"
+
+end
+
 post "/admin/drink/create" do
     name = params['name']
     value = params['value']
