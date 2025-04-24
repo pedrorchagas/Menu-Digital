@@ -7,3 +7,4 @@ gem "sinatra"
 gem "rackup"
 gem "puma"
 gem 'sqlite3'
+gem 'redis'
