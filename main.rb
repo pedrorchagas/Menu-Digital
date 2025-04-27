@@ -4,16 +4,22 @@ require 'redis'
 require_relative 'utils/database'
 require_relative 'utils/objects'
 
-set :bind, '0.0.0.0'
+set :bind, '192.168.18.15'
 set :port, 4567
 
 set :public_folder, 'public'
 
+#docker pull redis/redis-stack-server:latest
+#docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest
+# docker start redis-stack-server <- para iniciar o redis caso ele não tenha iniciado
 $redis = Redis.new(host: "localhost", port: 6379)
 
 getAll().each do | food |
     food.products.each do | product |
-        puts product.name
+        puts "name: ", product.name
+        puts "description: ", product.description
+        puts "image: ", product.image.empty?
+        puts "_____________________________________________"
     end
 end
 

@@ -46,4 +46,10 @@ class Item
   def setDescription(description)
     @description = description.to_s
   end
+
+  def getValueFormatted
+    inteiro, decimal = ("%.2f" % @value).split('.')
+    inteiro = inteiro.reverse.scan(/\d{1,3}/).join('.').reverse
+    "#{inteiro},#{decimal}"
+  end
 end
