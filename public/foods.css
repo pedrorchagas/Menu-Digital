@@ -3,6 +3,11 @@
     text-align: center;
 }
 
+#btn {
+    flex: 1;
+    padding: 3%;
+}
+
 .product#container {
     display: flex;
     flex-direction: row;

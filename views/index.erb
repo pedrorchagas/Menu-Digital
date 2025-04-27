@@ -13,9 +13,12 @@
                     <div class="flavor" id="container">
                         <% food.products.each do |item|%>
                             <div class="flavor"  <%= item.image.empty? ? 'id="noflex"' : 'id="flex"'  %>>
-                                <img src="<%= item.image %>" alt="">
+                                <div id="div_image">
+                                    <img src="<%= item.image %>" alt="">
+                                </div>
+
                                 
-                                <div>
+                                <div id="item_info">
                                     <div class="flavor" id="name-value">
                                         <div><h5><%= item.name%></h5></div>  <div>R$<%= item.value%></div>
                                     </div> 

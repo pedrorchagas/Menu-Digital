@@ -1,4 +1,6 @@
 require 'sinatra'
+require 'securerandom'
+require 'redis'
 require_relative 'utils/database'
 require_relative 'utils/objects'
 
@@ -7,10 +9,7 @@ set :port, 4567
 
 set :public_folder, 'public'
 
-#createFood("pizzas10", 3)
-#print("Comidas", listFoods())
-#addProduct("pizzas10", Item.new("Ovo", 20.00))
-#print(listProducts("pizzas10"))
+$redis = Redis.new(host: "localhost", port: 6379)
 
 getAll().each do | food |
     food.products.each do | product |
@@ -25,7 +24,27 @@ get "/" do
     erb :index
 end
 
+
+get "/login/" do
+    puts request
+    erb :login
+end
+
+post "/login/" do
+    user = params['user']
+    password = params['password']
+
+    if user == "ADM" and password == "1234"
+        uuid = SecureRandom.uuid
+        response.set_cookie("session", value: uuid, expires: Time.now + 3600 )
+        redirect '/admin'
+    else
+        "ERRADDOOOOOO"
+    end
+end
+
 get "/admin" do
+    puts uuid
     redirect '/admin/'
 end
 
@@ -76,6 +95,24 @@ post "/admin/food/:food/:id/delete" do
     redirect "/admin/#{params['food']}"
 end
 
+get "/admin/food/:food/:id/edit" do
+    @product = getProduct(params['food'], params['id'])
+    erb :edit_food
+end
+
+post "/admin/food/:food/:id/edit" do
+    product = getProduct(params['food'], params['id'])
+    puts " ID: #{product.id}"
+    product.name = params['name']
+    product.value = params['value'] 
+    product.description = params['description']
+    product.image = params['image']
+
+    editProduct(params['food'], product)
+    redirect "/admin/#{params['food']}"
+
+end
+
 post "/admin/drink/create" do
     name = params['name']
     value = params['value']
@@ -101,3 +138,5 @@ post "/admin/toy/:id/delete" do
     removeToy(id)
     redirect '/admin/'
 end
+
+$redis.flushall

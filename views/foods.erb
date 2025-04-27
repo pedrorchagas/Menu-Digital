@@ -1,31 +1,41 @@
 <% @style = "/foods.css"%>
-<div id="title">
+<div id="title" class="box">
     <h2><%= @food.getFactoredName %></h2>
     <p>Sabores:</p>
 </div>
-<ul>
-    <% @food.products.each do | product |%>
-        <li>
-            <div class="product" id="container">
-                <% unless product.image.empty? %>
-                    <img src="<%= product.image%>" alt="">
-                <% end %>
-                <div>
-                    <h2>Nome: <%= product.name %></h2>
-                    <h2>Valor: R$<%= product.value %></h2>
-                    <% unless product.description.empty? %>
-                        <p class="product">Ingredientes: <%= product.description %></p>
-                    <% end %>
-                    <form action="/admin/food/<%= @food.name%>/<%= product.id%>/delete" method="post">
-                        <input type="submit" value="Deletar">
-                    </form>
-                </div>
-                
-            </div>
-        </li>
+<div class="box">
+    <% unless @food.products.empty? %>
+        <ul>
+            <% @food.products.each do | product |%>
+                <li>
+                    <div class="product" id="container">
+                        <% unless product.image.empty? %>
+                            <img src="<%= product.image%>" alt="">
+                        <% end %>
+                        <div>
+                            <h2>Nome: <%= product.name %></h2>
+                            <h2>Valor: R$<%= product.value %></h2>
+                            <% unless product.description.empty? %>
+                                <p class="product">Ingredientes: <%= product.description %></p>
+                            <% end %>
+                            <div>
+                                <form action="/admin/food/<%= @food.name%>/<%= product.id%>/delete" method="post">
+                                    <button type="submit" id="btn">Deletar</button>
+                                </form>
+                                <a href="/admin/food/<%= @food.name %>/<%= product.id %>/edit">Editar</a>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <p>Aqui está muito quieto...</p>
     <% end %>
-</ul>
-<div id="form">
+</div>
+<div id="form" class="box">
     <h2>Adicionar sabor</h2>
     <form action="/admin/<%= @food.name%>/createproduct" method="post" id="form">
         <label for="name">Nome: </label>

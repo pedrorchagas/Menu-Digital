@@ -117,6 +117,21 @@ def getAll()
   return foods
 end
 
+def getProduct(food_name, product_id) 
+  data = $database.execute("SELECT * FROM products_#{food_name} WHERE unique_id = ? ", [product_id])
+  product = Item.new(data[0][1], data[0][2])
+  product.setImage(data[0][3])
+  product.setDescription(data[0][4])
+  product.setID(product_id)
+
+  return product
+end
+
+def editProduct(food_name, product)
+  puts product.name, product.value, product.description, product.image, product.id
+  $database.execute("UPDATE products_#{food_name} SET name = ?, value = ?, description = ?, image = ? WHERE unique_id = ?", [product.name, product.value, product.description, product.image, product.id])
+end
+
 def getDrinks()
   drinks = []
 

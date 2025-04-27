@@ -1,0 +1,15 @@
+<% @style = "/edit_food.css"%>
+<div id="form">
+    <h2>Editar produto: </h2>
+    <form action="" method="post" id="form">
+        <label for="name">Nome: </label>
+        <input type="text" name="name" value="<%= @product.name %>">
+        <label for="value">Valor: </label>
+        <input type="text" name="value" value="<%= @product.value %>">
+        <label for="description">Ingredientes: </label>
+        <input type="text" name="description" id="" value="<%= @product.description %>">
+        <label for="description">Link Imagem: </label>
+        <input type="text" name="image" id="" value="<%= @product.image %>">
+        <input type="submit" value="Editar produto">
+    </form>
+</div>

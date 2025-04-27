@@ -25,7 +25,7 @@ end
 class Item
 
   # Variáveis essenciais: NAME e VALUE
-  attr_reader :name, :value, :image_link, :description, :image, :id
+  attr_accessor :name, :value, :image_link, :description, :image, :id
 
   def initialize(name, value)
     @name = name

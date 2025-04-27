@@ -1,28 +1,32 @@
 <% @style = "/admin.css"%>
 <h2 id="title">Bem-vindo a área de adm</h2>
 
-<div>
+<div class="box">
     <div>
         <h3 id="title">Comidas: </h3>
-        <ul>
-            
-            <% @foods.each do | food |%>
+        <% unless @foods.empty? %>
+            <ul>
+                
+                <% @foods.each do | food |%>
 
-                <li>
-                    <div class="foods">
-                        
-                        <h4><%= food.getFactoredName %></h4>
-                        <p>Barraca: <%= food.id %></p>
-                        <div>
-                            <form action="/admin/<%= food.name %>/delete" method="post">
-                                <input type="submit" value="Deletar">
-                            </form>
-                            <a href="/admin/<%= food.name %>">Editar</a>
+                    <li>
+                        <div class="foods">
+                            
+                            <h4><%= food.getFactoredName %></h4>
+                            <p>Barraca: <%= food.id %></p>
+                            <div>
+                                <form action="/admin/<%= food.name %>/delete" method="post">
+                                    <button type="submit" id="btn">Deletar</button>
+                                </form>
+                                <a id="edit" href="/admin/<%= food.name %>">Editar</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            <% end %>
-        </ul>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            <p>Aqui está muito quieto...</p>
+        <% end %>
     </div>
 
     <div id="form">
@@ -37,26 +41,30 @@
     </div>
 </div>
 
-<div>
+<div class="box">
     <div>
         <h3 id="title">Bebidas: </h3>
-        <ul>
-            
-            <% @drinks.each do | drink |%>
+        <% unless @drinks.empty? %>
+            <ul>
+                
+                <% @drinks.each do | drink |%>
 
-                <li>
-                    <div class="foods">
-                        
-                        <h4><%= drink.name %></h4>
-                        <div>
-                            <form action="/admin/drink/<%= drink.id %>/delete" method="post">
-                                <input type="submit" value="Deletar">
-                            </form>
+                    <li>
+                        <div class="foods">
+                            
+                            <h4><%= drink.name %></h4>
+                            <div>
+                                <form action="/admin/drink/<%= drink.id %>/delete" method="post">
+                                    <button type="submit" id="btn">Deletar</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            <% end %>
-        </ul>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            <p>Aqui está muito quieto...</p>
+        <% end%>
     </div>
 
     <div id="form">
@@ -66,31 +74,35 @@
             <input type="text" name="name">
             <label for="value">Valor: </label>
             <input type="text" name="value">
-            <button type="submit">Criar</button>
+            <button type="submit" id="btn">Criar</button>
         </form>
     </div>
 </div>
 
-<div>
+<div class="box">
     <div>
         <h3 id="title">Briquedos: </h3>
-        <ul>
-            
-            <% @toys.each do | toy |%>
+        <% unless @toys.empty? %>
+            <ul>
+                
+                <% @toys.each do | toy |%>
 
-                <li>
-                    <div class="foods">
-                        
-                        <h4><%= toy.name %></h4>
-                        <div>
-                            <form action="/admin/toy/<%= toy.id %>/delete" method="post">
-                                <input type="submit" value="Deletar">
-                            </form>
+                    <li>
+                        <div class="foods">
+                            
+                            <h4><%= toy.name %></h4>
+                            <div>
+                                <form action="/admin/toy/<%= toy.id %>/delete" method="post">
+                                    <button type="submit" id="btn">Deletar</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            <% end %>
-        </ul>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            <p>Aqui está muito quieto...</p>
+        <% end %>
     </div>
 
     <div id="form">
