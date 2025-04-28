@@ -1,18 +1,14 @@
 require 'sinatra'
-require 'securerandom'
-require 'redis'
 require_relative 'utils/database'
 require_relative 'utils/objects'
+require_relative 'utils/sessions'
 
 set :bind, '192.168.18.15'
 set :port, 4567
 
 set :public_folder, 'public'
 
-#docker pull redis/redis-stack-server:latest
-#docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest
-# docker start redis-stack-server <- para iniciar o redis caso ele não tenha iniciado
-$redis = Redis.new(host: "localhost", port: 6379)
+
 
 getAll().each do | food |
     food.products.each do | product |
@@ -32,7 +28,7 @@ end
 
 
 get "/login/" do
-    puts request
+    puts request.ip
     erb :login
 end
 
@@ -41,8 +37,8 @@ post "/login/" do
     password = params['password']
 
     if user == "ADM" and password == "1234"
-        uuid = SecureRandom.uuid
-        response.set_cookie("session", value: uuid, expires: Time.now + 3600 )
+        
+        response.set_cookie("session", value: create_session(request.ip), expires: Time.now + 3600, path: "/" )
         redirect '/admin'
     else
         "ERRADDOOOOOO"
@@ -50,11 +46,24 @@ post "/login/" do
 end
 
 get "/admin" do
-    puts uuid
-    redirect '/admin/'
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+      redirect '/login/'
+    end
+    
+    redirect "/admin/"
 end
 
 get "/admin/" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+      redirect '/login/'
+    end
+
     @foods = listFoods()
     @drinks = getDrinks
     @toys = getToys
@@ -62,6 +71,13 @@ get "/admin/" do
 end
 
 post "/admin/createfood" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+      redirect '/login/'
+    end
+
     name = params["name"]
     id = params["id"]
 
@@ -71,17 +87,35 @@ post "/admin/createfood" do
 end
 
 get "/admin/:food" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
     @food = getFood(params['food'])
 
     erb :foods
 end
 
 post "/admin/:food/delete" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
     deleteFood(params['food'])
     redirect '/admin/'
 end
 
 post "/admin/:food/createproduct" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
     food = getFood(params['food'])
 
     product_name = params['name']
@@ -97,16 +131,34 @@ post "/admin/:food/createproduct" do
 end
 
 post "/admin/food/:food/:id/delete" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
     removeProduct(params['food'], params['id'])
     redirect "/admin/#{params['food']}"
 end
 
 get "/admin/food/:food/:id/edit" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
     @product = getProduct(params['food'], params['id'])
     erb :edit_food
 end
 
 post "/admin/food/:food/:id/edit" do
+    # validador da sessão
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
     product = getProduct(params['food'], params['id'])
     puts " ID: #{product.id}"
     product.name = params['name']
@@ -120,6 +172,11 @@ post "/admin/food/:food/:id/edit" do
 end
 
 post "/admin/drink/create" do
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
     name = params['name']
     value = params['value']
     addDrink(name, value)
@@ -127,12 +184,24 @@ post "/admin/drink/create" do
 end
 
 post "/admin/drink/:id/delete" do
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
+
     id = params['id']
     removeDrink(id)
     redirect '/admin/'
 end
 
 post "/admin/toy/create" do
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
+    
     name = params['name']
     value = params['value']
     addToy(name, value)
@@ -140,9 +209,16 @@ post "/admin/toy/create" do
 end
 
 post "/admin/toy/:id/delete" do
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+        redirect '/login/'
+    end
+    
     id = params['id']
     removeToy(id)
     redirect '/admin/'
 end
 
-$redis.flushall
+# Fazer a limpeza do banco de dados redis
+clean_redis
