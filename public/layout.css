@@ -73,9 +73,21 @@ main {
 }
 
 footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     text-align: center;
     color: white;
     background-color: gray;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.copy{
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.copy#github-link {
+    color: orange;
 }
