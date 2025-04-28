@@ -26,7 +26,8 @@ end
 
 
 get "/login/" do
-    puts request
+    puts request.env
+    puts request.host
     erb :login
 end
 
