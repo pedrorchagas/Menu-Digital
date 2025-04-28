@@ -23,10 +23,15 @@
 }
 
 
-#item_info {
+#item_info_flex {
     width: 100%;
     height: 100%;
     margin-left: 20px;
+}
+
+#item_info_no_flex {
+    width: 100%;
+    height: 100%;
 }
 
 .flavor#flex{
@@ -73,7 +78,7 @@
 }
 
 
-img {
+.flavor#image{
     border-radius: 10px;
     width: 100px;
     height: 100px;

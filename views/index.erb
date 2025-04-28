@@ -12,23 +12,42 @@
                     <h4 class="flavor" id="title">Sabores:</h4>
                     <div class="flavor" id="container">
                         <% food.products.each do |item|%>
-                            <div class="flavor"  <%= item.image.empty? ? 'id="noflex"' : 'id="flex"'  %>>
-                                <div id="div_image">
-                                    <img src="<%= item.image %>" alt="">
-                                </div>
+                            <% unless item.image.empty? %>
+                                <div class="flavor" id="flex">
 
-                                
-                                <div id="item_info">
-                                    <div class="flavor" id="name-value">
-                                        <div><h5><%= item.name%></h5></div>  <div>R$<%= item.value%></div>
-                                    </div> 
-                                    <div id="ingredientes">
-                                        <% unless item.description.empty? %>
-                                            Ingredientes: <%= item.description%>
-                                        <% end %>
+                        
+                                    <div id="div_image">
+                                        <img src="<%= item.image %>" alt=""a class="flavor" id="image">
+                                    </div>
+
+                                    
+                                    <div id="item_info_flex">
+                                        <div class="flavor" id="name-value">
+                                            <div><h5><%= item.name%></h5></div>  <div>R$<%= item.getValueFormatted%></div>
+                                        </div> 
+                                        <div id="ingredientes">
+                                            <% unless item.description.empty? %>
+                                                Ingredientes: <%= item.description%>
+                                            <% end %>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <% else %>
+                                <div class="flavor" id="noflex" >
+
+                                    
+                                    <div id="item_info_no_flex">
+                                        <div class="flavor" id="name-value">
+                                            <div><h5><%= item.name%></h5></div>  <div>R$<%= item.getValueFormatted%></div>
+                                        </div> 
+                                        <div id="ingredientes">
+                                            <% unless item.description.empty? %>
+                                                Ingredientes: <%= item.description%>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% end %>
                         <% end %>
                     </div>
                 </div>
@@ -49,7 +68,7 @@
                         <%= drink.name%>
                     </div>
                     <div>
-                        R$<%= drink.value%>
+                        R$<%= drink.getValueFormatted%>
                     </div>
                 </div>
             </li>
@@ -67,7 +86,7 @@
                 </div>
 
                 <div>
-                    R$<%= toy.value%>
+                    R$<%= toy.getValueFormatted%>
                 </div>
             </div>
         <% end %>
