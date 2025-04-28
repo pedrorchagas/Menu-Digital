@@ -3,7 +3,7 @@ require_relative 'utils/database'
 require_relative 'utils/objects'
 require_relative 'utils/sessions'
 
-set :bind, '192.168.18.15'
+set :bind, '0.0.0.0'
 set :port, 4567
 
 set :public_folder, 'public'
@@ -28,7 +28,6 @@ end
 
 
 get "/login/" do
-    puts request.ip
     erb :login
 end
 
