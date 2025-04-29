@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    container_name: menu_digital
+    ports:
+      - "4567:4567"
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+    networks:
+      - app_network
+
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redis_menu_digital
+    ports:
+      - "6379:6379"       # Redis
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
