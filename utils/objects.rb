@@ -13,7 +13,7 @@ class Food
     end
 
     def getFactoredName
-        return @name.capitalize.gsub("_", "")
+      return @name.gsub("_", " ").capitalize
     end
 
     def addItem(item)
