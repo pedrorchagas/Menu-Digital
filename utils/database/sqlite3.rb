@@ -3,6 +3,9 @@ require_relative 'objects'
 
 
 $database = SQLite3::Database.new "database.db"
+
+
+
 $database.execute <<-SQL
   CREATE TABLE IF NOT EXISTS foods (
     Unique_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,7 +45,6 @@ def createFood(food)
       created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   SQL
-
 end
 
 def deleteFood(food_name)

@@ -8,3 +8,5 @@ gem "rackup"
 gem "puma"
 gem 'sqlite3'
 gem 'redis'
+gem 'pg'
+gem 'mysql2'

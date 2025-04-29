@@ -1,13 +1,25 @@
 require 'sinatra'
-require_relative 'utils/database'
 require_relative 'utils/objects'
 require_relative 'utils/sessions'
 
+database = "mysql"
+if database == 'sqlite'
+    # sqlite
+    require_relative 'utils/database'
+ 
+elsif database == 'postgre' 
+    
+    # postgreSQL
+    require_relative 'utils/postgre'
+
+else 
+    require_relative 'utils/database/mysql'
+end
+
+
 set :bind, '0.0.0.0'
 set :port, 4567
-
 set :public_folder, 'public'
-
 
 
 getAll().each do | food |
