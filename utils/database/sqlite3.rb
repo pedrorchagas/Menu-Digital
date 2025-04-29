@@ -1,5 +1,5 @@
 require 'sqlite3'
-require_relative 'objects'
+require_relative '../objects'
 
 
 $database = SQLite3::Database.new "database.db"

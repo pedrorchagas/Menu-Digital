@@ -1,5 +1,5 @@
 require 'pg'
-require_relative 'objects'
+require_relative '../objects'
 
 $database = PG.connect(
   dbname: 'meu_banco',

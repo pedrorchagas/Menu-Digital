@@ -2,15 +2,15 @@ require 'sinatra'
 require_relative 'utils/objects'
 require_relative 'utils/sessions'
 
-database = "mysql"
+database = "sqlite"
 if database == 'sqlite'
     # sqlite
-    require_relative 'utils/database'
+    require_relative 'utils/database/sqlite3'
  
 elsif database == 'postgre' 
     
     # postgreSQL
-    require_relative 'utils/postgre'
+    require_relative 'utils/database/postgre'
 
 else 
     require_relative 'utils/database/mysql'
