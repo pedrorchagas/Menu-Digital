@@ -1,3 +1,4 @@
+## ATENÇÃO, ESSA PARTE AINDA ESTÁ EM DESENVOLVIMENTO, PORTANTO NÃO DEVE SER USADO
 require 'pg'
 require_relative '../objects'
 
