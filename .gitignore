@@ -1,4 +1,6 @@
 database.db
 Gemfile.lock
 mysql/
+data/
+letsencrypt/
 .env
