@@ -1,12 +1,18 @@
+require 'dotenv'
 require 'mysql2'
 require_relative '../objects'
 
+Dotenv.load
+
+#docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=senha123 -e MYSQL_DATABASE=meubanco -e MYSQL_USER=usuario -e MYSQL_PASSWORD=senhausuario -e MYSQL_ROOT_PASSWORD=senha123 -p 3306:3306 mysql:latest
+
 # Conexão com o banco MySQL
 $database = Mysql2::Client.new(
-  host: "localhost",
-  username: "seu_usuario",
-  password: "sua_senha",
-  database: "seu_banco",
+  host: ENV['DATABASE_HOST'],
+  username: ENV['DATABASE_USERNAME'],
+  password: ENV['DATABASE_PASSWORD'],
+  database: ENV['DATABASE_DB'],
+  port: 3306,
   symbolize_keys: true
 )
 

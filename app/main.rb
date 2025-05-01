@@ -1,9 +1,11 @@
 require 'sinatra'
-#require 'rack/protection'
+require 'dotenv'
 require_relative 'utils/objects'
 require_relative 'utils/sessions'
 
-database = "sqlite"
+Dotenv.load
+
+database = ENV['DATABASE']
 if database == 'sqlite'
     # sqlite
     require_relative 'utils/database/sqlite3'
@@ -14,6 +16,7 @@ elsif database == 'postgre'
     require_relative 'utils/database/postgre'
 
 else 
+    # mysql
     require_relative 'utils/database/mysql'
 end
 
@@ -27,15 +30,6 @@ configure do
   
     # Opção 2: Desativar a proteção (não recomendado para produção)
     # set :protection, except: :host_authorization
-end
-
-getAll().each do | food |
-    food.products.each do | product |
-        puts "name: ", product.name
-        puts "description: ", product.description
-        puts "image: ", product.image.empty?
-        puts "_____________________________________________"
-    end
 end
 
 get "/" do
@@ -54,7 +48,7 @@ post "/login/" do
     user = params['user']
     password = params['password']
 
-    if user == "ADM" and password == "1234"
+    if user == ENV['ROOT_LOGIN'] and password == ENV['ROOT_PASSWORD']
         
         response.set_cookie("session", value: create_session(request.ip), expires: Time.now + 3600, path: "/" )
         redirect '/admin'
