@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'rack/protection'
+#require 'rack/protection'
 require_relative 'utils/objects'
 require_relative 'utils/sessions'
 
@@ -21,8 +21,13 @@ end
 set :bind, '0.0.0.0'
 set :port, 4567
 set :public_folder, 'public'
-use Rack::Protection::HostAuthorization, hosts: ['feiraamizade2025.evocloud.tec.br', 'localhost', request.host]
-
+configure do
+    # Opção 1: Whitelist de hosts permitidos (recomendado)
+    set :protection, :host_whitelist => ["feiraamizade.evocloud.tec.br", "evocloud.tec.br", "nginx", "201.54.14.22"] # "npm" é o nome do serviço no Docker Compose
+  
+    # Opção 2: Desativar a proteção (não recomendado para produção)
+    # set :protection, except: :host_authorization
+  end
 
 getAll().each do | food |
     food.products.each do | product |
