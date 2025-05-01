@@ -27,7 +27,7 @@ configure do
   
     # Opção 2: Desativar a proteção (não recomendado para produção)
     # set :protection, except: :host_authorization
-  end
+end
 
 getAll().each do | food |
     food.products.each do | product |
