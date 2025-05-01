@@ -2,6 +2,8 @@ require 'redis'
 require 'securerandom'
 require 'dotenv'
 
+Dotenv.load
+
 #docker pull redis/redis-stack-server:latest
 #docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest
 # docker start redis-stack-server <- para iniciar o redis caso ele não tenha iniciado
