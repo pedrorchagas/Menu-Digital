@@ -1,19 +1,10 @@
-FROM ruby:3.4.1
+FROM ruby
 
-# Instala dependências do sistema
-RUN apt-get update -qq && apt-get install -y build-essential libsqlite3-dev
-
-# Cria diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos para o container
-COPY . .
+COPY app/Gemfile* ./
+RUN bundle install
 
-# Instala as gems
-RUN gem install bundler && bundle install
+COPY app .
 
-# Expõe a porta padrão do Sinatra
-EXPOSE 4567
-
-# Comando para iniciar o Sinatra
-CMD ["ruby", "main.rb"]
+CMD ["bundle", "exec", "puma", "-C", "puma.rb"]
