@@ -22,7 +22,7 @@ set :bind, '0.0.0.0'
 set :port, 4567
 set :public_folder, 'public'
 set :protection, except: :http_origin
-use Rack::Protection::HostHeader, hosts: ['seudominio.com'] 
+use Rack::Protection::HostHeader, hosts: ['feiraamizade2025.evocloud.tec.br'] 
 
 
 getAll().each do | food |
