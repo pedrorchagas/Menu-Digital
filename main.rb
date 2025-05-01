@@ -23,7 +23,7 @@ set :port, 4567
 set :public_folder, 'public'
 configure do
     # Opção 1: Whitelist de hosts permitidos (recomendado)
-    set :protection, :host_whitelist => ["feiraamizade.evocloud.tec.br", "evocloud.tec.br", "nginx", "201.54.14.22"] # "npm" é o nome do serviço no Docker Compose
+    set :protection, :host_whitelist => ["feiraamizade2025.evocloud.tec.br", "evocloud.tec.br", "nginx", "201.54.14.22"] # "npm" é o nome do serviço no Docker Compose
   
     # Opção 2: Desativar a proteção (não recomendado para produção)
     # set :protection, except: :host_authorization
