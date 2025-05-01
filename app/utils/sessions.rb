@@ -9,9 +9,9 @@ Dotenv.load
 # docker start redis-stack-server <- para iniciar o redis caso ele não tenha iniciado
 production = ENV['PRODUCTION'].to_s.downcase == 'true'
 if production
-  $redis = Redis.new(host: "localhost", port: 6379)
-else
   $redis = Redis.new(host: "redis", port: 6379)
+else
+  $redis = Redis.new(host: "localhost", port: 6379)
 end
 
 
