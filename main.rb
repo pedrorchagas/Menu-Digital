@@ -24,6 +24,7 @@ set :public_folder, 'public'
 use Rack::Protection, except: :host_authorization
 
 before do
+  puts "Host recebido: #{request.host}"
   allowed_hosts = ['feiraamizade2025.evocloud.tec.br', 'localhost']
   unless allowed_hosts.include?(request.host)
     halt 403, "Host not permitted"
