@@ -24,6 +24,7 @@ services:
     container_name: mysql
     restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: feiraamizade_root
       MYSQL_DATABASE: feiraamizade_banco
       MYSQL_USER: feiraamizade
       MYSQL_PASSWORD: feiraamizade_password
