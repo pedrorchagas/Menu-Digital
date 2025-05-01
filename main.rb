@@ -21,10 +21,14 @@ end
 set :bind, '0.0.0.0'
 set :port, 4567
 set :public_folder, 'public'
-use Rack::Protection::HostAuthorization, hosts: [
-  'feiraamizade2025.evocloud.tec.br',
-  'localhost'
-]
+use Rack::Protection, except: :host_authorization
+
+before do
+  allowed_hosts = ['feiraamizade2025.evocloud.tec.br', 'localhost']
+  unless allowed_hosts.include?(request.host)
+    halt 403, "Host not permitted"
+  end
+end
 
 getAll().each do | food |
     food.products.each do | product |
