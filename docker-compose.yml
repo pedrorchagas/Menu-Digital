@@ -5,7 +5,7 @@ services:
       RACK_ENV: production
     expose:
       - "4567"
-    epends_on:
+    depends_on:
       - redis
     networks:
       - web
