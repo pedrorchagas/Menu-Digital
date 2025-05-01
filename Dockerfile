@@ -2,9 +2,9 @@ FROM ruby
 
 WORKDIR /app
 
-COPY app/Gemfile* ./
+COPY Gemfile* ./
 RUN bundle install
 
-COPY app .
+COPY .
 
 CMD ["bundle", "exec", "puma", "-C", "puma.rb"]

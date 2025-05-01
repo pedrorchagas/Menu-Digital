@@ -32,14 +32,5 @@ services:
     networks:
       - web
 
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-    entrypoint: /bin/sh -c
-    command: >
-      "certbot certonly --standalone --non-interactive --agree-tos
-      --email perodrigues132006@gmail.com -d feiraamizade2025.evocloud.tec.br"
-
 networks:
   web:
