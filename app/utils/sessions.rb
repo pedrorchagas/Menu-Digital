@@ -1,10 +1,16 @@
 require 'redis'
 require 'securerandom'
+require 'dotenv'
 
 #docker pull redis/redis-stack-server:latest
 #docker run -d --name redis-stack-server -p 6379:6379 redis/redis-stack-server:latest
 # docker start redis-stack-server <- para iniciar o redis caso ele não tenha iniciado
-$redis = Redis.new(host: "localhost", port: 6379)
+production = ENV['PRODUCTION'].to_s.downcase == 'true'
+if product
+  $redis = Redis.new(host: "localhost", port: 6379)
+else
+  $redis = Redis.new(host: "redis", port: 6379)
+end
 
 
 def create_session(ip)
