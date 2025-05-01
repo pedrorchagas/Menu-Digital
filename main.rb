@@ -20,6 +20,7 @@ end
 set :bind, '0.0.0.0'
 set :port, 4567
 set :public_folder, 'public'
+set :protection, except: :http_origin
 
 
 getAll().each do | food |
