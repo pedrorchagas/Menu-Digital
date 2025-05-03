@@ -2,6 +2,7 @@ require 'sinatra'
 require 'dotenv'
 require_relative 'utils/objects'
 require_relative 'utils/sessions'
+require 'fileutils'
 
 Dotenv.load
 
@@ -81,6 +82,38 @@ get "/admin/" do
     @toys = getToys
     erb :admin
 end
+
+get "/admin/images" do
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+      redirect '/login/'
+    end
+    @images = Dir.glob('public/uploads/*').map { |f| "/uploads/#{File.basename(f)}" }
+    erb :images
+end
+
+post '/admin/images/upload' do
+    uuid = request.cookies["session"]
+    ip = request.ip
+    unless validate_session(uuid, ip)
+      redirect '/login/'
+    end
+    if params[:file]
+      filename = params[:file][:filename]
+      tempfile = params[:file][:tempfile]
+      
+      save_path = File.join('public/images', filename)
+  
+      # Cria a pasta se não existir (importante para múltiplos workers)
+      FileUtils.mkdir_p('public/images')
+  
+      File.open(save_path, 'wb') do |f|
+        f.write(tempfile.read)
+      end
+    end
+    redirect '/admin/images'
+  end
 
 post "/admin/createfood" do
     # validador da sessão

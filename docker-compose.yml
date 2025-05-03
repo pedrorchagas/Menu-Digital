@@ -42,6 +42,8 @@ services:
       - db
     networks:
       - web
+    volumes:
+      - ./public/images:/app/public/images
   
   nginx:
     image: nginx:alpine

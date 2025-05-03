@@ -1,0 +1,10 @@
+<h1>Upload de Imagens</h1>
+<form action="/admin.images/upload" method="post" enctype="multipart/form-data">
+  <input type="file" name="file">
+  <input type="submit" value="Enviar">
+</form>
+
+<h2>Imagens Salvas:</h2>
+<% @images.each do |img| %>
+  <img src="<%= img %>" style="max-width: 200px;">
+<% end %>
