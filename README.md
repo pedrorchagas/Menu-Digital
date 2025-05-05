@@ -35,6 +35,6 @@ Planejo colocar essas melhorias em prática na próxima edição da feira da ami
 
 
 # Dados: 
-    
+    ![relatório](/images/users.png)
 # Imagens: 
 
