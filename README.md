@@ -1,3 +1,6 @@
+> Ideia: A feira a amizade é um evento que acontece na Igreja Assembleia de Deus Beira Rio a varios anos, e como sou membro dessa igreja e queria contribuir com algo para o evento, eu decidi criar um menu digital com os alimentos vendidos na feira para facilitar a escolha do público. 
+> Sobre a feira: A feira é um evento social com foco em arrecadação de fundos para o ministério social poder abençoar vidas.
+
 # Menu Digital para a Feira da Amizade 2025
 Esse foi um projeto bem desafiador, pois tive pouco tempo de desenvolvimento e tinha poucos conhecimentos de colocar projetos em produção. 
 
@@ -35,6 +38,11 @@ Planejo colocar essas melhorias em prática na próxima edição da feira da ami
 
 
 # Dados: 
-    ![relatório](/images/users.png)
-# Imagens: 
+[![relatório](https://github.com/pedrorchagas/Menu-Digital/blob/main/images/users.png?raw=true)
+Utilizei o Google Analytics para pegar algumas informações, como: Número de visitantes, tempo gasto, origem, etc.
+Para um projeto grande esses números podem ser muito pequenos, mas considerando que tive menos de uma semana para desenvolver o sistema e colocar no ar. Ver esses números me encheu de grande alegria.
+
+# Conclusão: 
+Portanto, com esse projeto eu pude colocar a mão na massa e realmente testar e aprender sobre diversas tecnologias que estão em alta no mercado, além de poder contribuir na arrecadação de fundos para o ministério social da igreja. E pude sentir uma sensação muito gostosa, que é de ver as pessoas utilizando uma solução que eu desenvolvi. 
+    
 
