@@ -38,7 +38,7 @@ Planejo colocar essas melhorias em prática na próxima edição da feira da ami
 
 
 # Dados: 
-[![relatório](https://github.com/pedrorchagas/Menu-Digital/blob/main/images/users.png?raw=true)
+![relatório](https://github.com/pedrorchagas/Menu-Digital/blob/main/images/users.png?raw=true)
 Utilizei o Google Analytics para pegar algumas informações, como: Número de visitantes, tempo gasto, origem, etc.
 Para um projeto grande esses números podem ser muito pequenos, mas considerando que tive menos de uma semana para desenvolver o sistema e colocar no ar. Ver esses números me encheu de grande alegria.
 
